@@ -13,7 +13,8 @@ function addToCollection(title, artist, yearPublished) {
   let album = {
     Title: title,
     Artist: artist,
-    Published: yearPublished
+    Published: yearPublished,
+    Tracks: []
   }
   collection.push(album);
   return album;
@@ -40,15 +41,16 @@ console.log('Collection:', collection);
    Loop over the array and console.log each album's information formatted like: `TITLE by ARTIST, published in YEAR`. */
 
 function showCollection(arr) {
-  console.log('Albums in collection is:', arr.length);
-  for (i in arr) {
-    
+  console.log( 'Albums in collection is:', arr.length );
+  for (let album = 0; album < arr.length; album++) { // Looping through all albums
+    console.log(arr[album].Title, 'by', arr[album].Artist + ', published in', arr[album].Published); //
   }
-}
+};
 
 // Test the `showCollection` function.
 
-console.log('Testing showCollection:', showCollection(collection));
+console.log('Testing showCollection:');
+showCollection(collection);
 
 /* Add a function named `findByArtist`. This function should:
    Take in `artist` (a string) parameter
@@ -56,12 +58,25 @@ console.log('Testing showCollection:', showCollection(collection));
    Loop through the `collection` and add any objects with a matching artist to the array.
    Return the array with the matching results. If no results are found, return an empty array.*/
 
-function findByArtist() {
-
+function findByArtist(artist) {
+  let results = [];
+  console.log('Test 1');
+  for (album in collection) {
+    console.log('Test 2');
+    if (album.Artist === artist) {
+      console.log('Test 3');
+      results.push(artist);
+    }
+    return results;
+  }
 }
 
 // Test the `findByArtist` function. Make sure to test with an artist you know is in the collection,
 // as well as an artist you know is not in your collection. Check that for artists with multiple matches, all are found.
+
+console.log('Testing findByArtist (artist is in there):', findByArtist('Ashnikko'));
+console.log('Testing findByArtist (artist is in there 2 times):', findByArtist('Lime Cordiale'));
+console.log('Testing findByArtist (artist not in there):', findByArtist('TMG'));
 
 /* Create a function called `search`. This function should:
    Take an input parameter for a search criteria object.
