@@ -9,7 +9,7 @@ let collection = [];
    Add the new object to the end of the `collection` array
    Return the newly created object */
 
-function addToCollection(title, artist, yearPublished) {
+function addToCollection(title, artist, yearPublished, Tracks) {
   let album = {
     Title: title,
     Artist: artist,
@@ -43,7 +43,7 @@ console.log('Collection:', collection);
 function showCollection(arr) {
   console.log( 'Albums in collection is:', arr.length );
   for (let album = 0; album < arr.length; album++) { // Looping through all albums
-    console.log(arr[album].Title, 'by', arr[album].Artist + ', published in', arr[album].Published); //
+    console.log(arr[album].Title, 'by', arr[album].Artist + ', published in', arr[album].Published); // Logging album info as instructed
   }
 };
 
@@ -59,39 +59,61 @@ showCollection(collection);
    Return the array with the matching results. If no results are found, return an empty array.*/
 
 function findByArtist(artist) {
-  let results = [];
-  console.log('Test 1');
+  let results = []; // empty arr to store artist names
   for (album in collection) {
-    console.log('Test 2');
-    if (album.Artist === artist) {
-      console.log('Test 3');
+    console.log( 'Inside artist loop' ); // testing where I'm at in the code block
+    if (collection[album].Artist === artist) {
+      console.log( 'Found a match' ); // testing where I'm at in the code block
       results.push(artist);
     }
-    return results;
   }
+  console.log( 'Left artist loop' ); // testing where I'm at in the code block
+  return results;
 }
 
 // Test the `findByArtist` function. Make sure to test with an artist you know is in the collection,
 // as well as an artist you know is not in your collection. Check that for artists with multiple matches, all are found.
 
-console.log('Testing findByArtist (artist is in there):', findByArtist('Ashnikko'));
+console.log('Testing findByArtist (artist is in there):', findByArtist('Logic'));
 console.log('Testing findByArtist (artist is in there 2 times):', findByArtist('Lime Cordiale'));
 console.log('Testing findByArtist (artist not in there):', findByArtist('TMG'));
+
+// Stretch goals:
 
 /* Create a function called `search`. This function should:
    Take an input parameter for a search criteria object.
    Create your solution based on a search object that has these properties:
-  { artist: 'Ray Charles', year: 1957 }
-   The returned output from `search` should meet these requirements:
-   Return a new array of all items in the `collection` matching *all* of the search criteria.
-   If no results are found, return an empty array.
-   If there is no search object or an empty search object provided as input, then return all albums in the `collection`. */
+  { artist: 'Ray Charles', year: 1957 } */
 
-function search() {
+function search( obj ) {
+  matches = [];
+  if (obj === []) {
+    console.log('Inside 1st if statement'); // testing where I'm at in the code block
+    return collection;
+  }
+  for (album in collection) { // Cycling through every album in collection
+    console.log('Inside for loop'); // testing where I'm at in the code block
+    if (collection[album].Artist === obj.artist && collection[album].Year === obj.year) { // wow this does NOT work
+      console.log('Inside of if statement'); // testing where I'm at in the code block
+// Return a new array of all items in the `collection` matching *all* of the search criteria.
+      matches.push(obj.artist, obj.year);
+    }
+    console.log('Left 1st if loop');
+    return matches;
+  }
+ }
 
-}
 
-/* Add an array of `tracks` to your album objects. Each track should have a `name` and `duration`. You will need to update the functions to support this new property:
+// The returned output from `search` should meet these requirements:
+// Return a new array of all items in the `collection` matching *all* of the search criteria.
+console.log( 'Testing search, should work', search( {artist: 'Ashnikko', year: 2021} ));
+// If no results are found, return an empty array.
+console.log( 'Testing search, no result found:', search( {artist: 'Ray Charles', year: 1957 }) );
+// If there is no search object or an empty search object provided as input, then return all albums in the `collection`.
+console.log( 'Testing search empty obj:', search() );
+
+/* Add an array of `tracks` to your album objects. Each track should have a `name` and `duration`.
+   You will need to update the functions to support this new property:
    Update the `addToCollection` function to also take an input parameter for the array of tracks.
    Update `search` to allow a `trackName` search criteria.
    Update the `showCollection` function to display the list of tracks for each album with its name and duration. */
