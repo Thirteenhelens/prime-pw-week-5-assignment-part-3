@@ -14,7 +14,6 @@ function addToCollection(title, artist, yearPublished, Tracks) {
     Title: title,
     Artist: artist,
     Published: yearPublished,
-    Tracks: []
   }
   collection.push(album);
   return album;
@@ -85,18 +84,18 @@ console.log('Testing findByArtist (artist not in there):', findByArtist('TMG'));
    Create your solution based on a search object that has these properties:
   { artist: 'Ray Charles', year: 1957 } */
 
-function search( obj ) {
+/* function search( obj ) {
   matches = [];
-  if (obj === []) {
+  if (obj === {}) {
     console.log('Inside 1st if statement'); // testing where I'm at in the code block
     return collection;
   }
   for (let album = 0; album < collection.length; album++) { // Cycling through every album in collection
     console.log('Inside for loop'); // testing where I'm at in the code block
-    if (collection[album].Artist === obj.artist && collection[album].Year === obj.year) { // wow this does NOT work, it seems checking the year breaks it - as well as it stops at the first album :(
+    if (collection[album].Artist === obj.artist && collection[album].Year === obj.year) {
+      // wow this does NOT work, it seems checking the year breaks it - as well as it stops at the first album :(
       console.log('Inside of if statement'); // testing where I'm at in the code block
           matches.push(obj.artist, obj.year);
-      //matches.push(obj.artist, obj.year);
     }
     console.log('Left 1st if loop');
     return matches;
@@ -110,11 +109,5 @@ console.log( 'Testing search, should work', search( {artist: 'Ashnikko', year: 2
 // If no results are found, return an empty array.
 console.log( 'Testing search, no result found:', search( {artist: 'Ray Charles', year: 1957 }) );
 // If there is no search object or an empty search object provided as input, then return all albums in the `collection`.
-//console.log( 'Testing search empty obj:', search() );
-console.log( 'Testing for redundancy:', search( {artist: 'Lime Cordiale', year: 2020} ));
-
-/* Add an array of `tracks` to your album objects. Each track should have a `name` and `duration`.
-   You will need to update the functions to support this new property:
-   Update the `addToCollection` function to also take an input parameter for the array of tracks.
-   Update `search` to allow a `trackName` search criteria.
-   Update the `showCollection` function to display the list of tracks for each album with its name and duration. */
+console.log( 'Testing search empty obj:', search({}) );
+console.log( 'Testing for redundancy:', search( {artist: 'Lime Cordiale', year: 2020} )); */
